@@ -1,0 +1,22 @@
+<h1>Goal</h1>
+
+<%= @goal.body %>
+<%= "Private" if @goal.priv %>
+<%= "Public" unless @goal.priv %>
+<br>
+<%= link_to "Edit Goal", edit_goal_url(@goal) %>
+<br>
+<%= button_to "Delete Goal", goal_url(@goal), method: :delete %>
+<%= @goal.status %>
+<% if @goal.status == "Incomplete" %>
+  <form action="<%= goal_url(@goal) %>" method="POST">
+    <input type="hidden" name="_method" value="PATCH">
+
+    <input type="hidden"
+          name="authenticity_token"
+          value="<%= form_authenticity_token %>">
+
+    <input type="hidden" name="goal[status]" value="Complete">
+    <input type="submit" value="Goal Complete">
+  </form>
+<% end %>

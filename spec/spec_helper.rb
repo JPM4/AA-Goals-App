@@ -54,3 +54,16 @@ def sign_in(username, password)
   fill_in "Password", with: password
   click_button 'Login'
 end
+
+def create_goals
+  sign_up('ginger baker')
+  sign_in('ginger baker', 'TestPass')
+  visit new_goal_url
+  fill_in 'body', :with => "Run Five Miles"
+  choose 'pub'
+  click_on 'Create Goal'
+  visit new_goal_url
+  fill_in 'body', :with => "Stop Eating Candy"
+  choose 'priv'
+  click_on 'Create Goal'
+end

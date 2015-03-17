@@ -1,1 +1,11 @@
 <h1><%= "Welcome, #{@user.username}" %></h1>
+
+<ul>
+  <% @user.goals.each do |goal| %>
+    <% if current_user == @user %>
+      <li><%= goal.body %></li>
+    <% elsif !goal.priv %>
+      <li><%= goal.body %></li>
+    <% end %>
+  <% end %>
+</ul>
